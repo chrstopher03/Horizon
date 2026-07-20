@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> HORIZON</title>
+        <link rel="icon" href="1.jpeg">
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#000000">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:#ffffff;
+  color:#161616;
+}
+
+/* HEADER */
+.header{
+  position:sticky;
+  top:0;
+  background:#ffffffd9;
+  backdrop-filter:blur(12px);
+  padding:14px 18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #ffffff;
+  z-index:10;
+}
+
+.header h1{
+  font-family:'Playfair Display',serif;
+  font-size:20px;
+}
+
+/* SEARCH */
+.search{
+  border-bottom:1px solid #e8cfd6;
+  padding:5px 10px;
+}
+
+.search input{
+  width:100%;
+  padding:10px;
+  border:none;
+  outline:none;
+  background:transparent;
+}
+
+/* CONTENT */
+.content{
+  padding:15px;
+  padding-bottom:100px;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+}
+
+@media(min-width:768px){
+  .grid{grid-template-columns:repeat(3,1fr);}
+}
+@media(min-width:1100px){
+  .grid{grid-template-columns:repeat(4,1fr);}
+}
+.brand{
+  font-family:'Playfair Display', serif;
+  font-size:18px;
+  text-align:center;
+  line-height:1.2;
+  font-weight:700;
+
+  background: linear-gradient(45deg, #000000, #000000);
+
+  /* 🔥 FIX importante */
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.brand span{
+  display:block;
+  font-size:11px;
+  font-weight:400;
+  margin-top:2px;
+}
+/* CARD MEJORADA */
+.card{
+  background:#fff;
+  padding:10px;
+  border-radius:20px;
+  transition:.3s;
+  box-shadow:0 5px 15px rgba(255,105,135,.08);
+  cursor:pointer;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+}
+
+.card img{
+  width:100%;
+  height:160px;
+  object-fit:contain;
+  background:#ffffff;
+  border-radius:12px;
+  padding:10px;
+}
+
+.info{
+  padding:8px 4px;
+}
+
+.info h4{
+  font-size:13px;
+  font-weight:500;
+}
+
+.price{
+  color:#000000;
+  font-weight:700;
+}
+/* MODAL MEJORADO */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.4);
+  display:none;
+  z-index:100;
+  backdrop-filter:blur(5px);
+}
+
+.modal-content{
+  background:#fff;
+  border-radius:25px 25px 0 0;
+  position:absolute;
+  bottom:0;
+  width:100%;
+  max-height:90%;
+  overflow:auto;
+  padding:20px;
+  animation:slideUp .3s ease;
+}
+
+/* ANIMACIÓN */
+@keyframes slideUp{
+  from{transform:translateY(100%);}
+  to{transform:translateY(0);}
+}
+
+/* IMAGEN */
+.modal img{
+  width:100%;
+  height:260px;
+  object-fit:contain;
+  background:#ffffff;
+  border-radius:15px;
+  padding:15px;
+}
+
+/* TEXTO */
+.modal h2{
+  font-family:'Playfair Display',serif;
+  font-size:20px;
+  margin-top:15px;
+}
+
+.modal p{
+  font-size:14px;
+  color:#666;
+  margin:5px 0;
+}
+
+.modal h3{
+  color:#000000;
+  font-size:22px;
+  margin-top:5px;
+}
+
+/* BOTONES */
+.buy{
+  margin-top:15px;
+  background:linear-gradient(135deg,#000000,#000000);
+  color:#fff;
+  padding:16px;
+  text-align:center;
+  border-radius:14px;
+  font-weight:600;
+  font-size:15px;
+  box-shadow:0 10px 20px rgba(255, 255, 255, 0.3);
+  cursor:pointer;
+}
+
+.buy:active{
+  transform:scale(.97);
+}
+
+.back{
+  margin-top:10px;
+  text-align:center;
+  padding:12px;
+  border:1px solid #eee;
+  border-radius:12px;
+  color:#555;
+  cursor:pointer;
+}
+
+/* QTY */
+.qty-box{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:20px;
+  margin:20px 0;
+}
+
+.qty-box button{
+  padding:10px 16px;
+  border:none;
+  background:#000000;
+  color:#fff;
+  border-radius:10px;
+  font-size:16px;
+}
+
+.qty-box span{
+  font-size:18px;
+  font-weight:600;
+}
+/* NAV */
+.nav{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  background:#ffffffee;
+  backdrop-filter:blur(10px);
+  display:flex;
+  justify-content:space-around;
+  padding:14px;
+  border-top:1px solid #f3dce3;
+}
+
+/* ICONOS */
+.nav i{
+  font-size:20px;
+  color:#000000;
+}
+
+/* CARRITO CON BURBUJA */
+.cart-icon{
+  position:relative;
+  cursor:pointer;
+}
+
+.cart-icon span{
+  position:absolute;
+  top:-6px;
+  right:-10px;
+  background:#ff4d6d;
+  color:#fff;
+  font-size:11px;
+  padding:3px 6px;
+  border-radius:50%;
+  min-width:18px;
+  text-align:center;
+}
+
+/* TOAST */
+.toast{
+  position:fixed;
+  bottom:80px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#000000;
+  color:#fff;
+  padding:10px 20px;
+  border-radius:20px;
+  opacity:0;
+  transition:.3s;
+}
+
+.toast.show{
+  opacity:1;
+}
+
+.size-box{
+  margin-top:18px;
+}
+
+.size-box h4{
+  margin-bottom:10px;
+  font-size:15px;
+}
+
+.sizes{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.size{
+  padding:10px 16px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  cursor:pointer;
+  transition:.25s;
+  font-weight:600;
+}
+
+.size:hover{
+  background:#000;
+  color:#fff;
+}
+
+.size.active{
+  background:#000;
+  color:#fff;
+  border-color:#000;
+}
+</style>
+</head>
+
+<body>
+<div class="header">
+  <i class="fa fa-bars"></i>
+
+  <h1 class="brand">
+    HORIZON</span>
+  </h1>
+
+  <i class="fa fa-shopping-bag" onclick="location.href='carrito.html'"></i>
+</div>
+
+<div class="search">
+  <input id="searchInput" placeholder="Buscar...">
+</div>
+
+<div class="content">
+  <div class="grid" id="products"></div>
+</div>
+
+<div id="toast" class="toast">Agregado </div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <img id="dImg">
+    <h2 id="dName"></h2>
+    <p id="dDesc"></p>
+    <h3 id="dPrice"></h3>
+<div class="size-box" id="sizeBox">
+  <h4>Selecciona una talla</h4>
+
+  <div class="sizes" id="sizes"></div>
+</div>
+    <div class="qty-box">
+      <button onclick="changeQty(-1)">-</button>
+      <span id="qty">1</span>
+      <button onclick="changeQty(1)">+</button>
+    </div>
+
+    <div class="buy" onclick="addToCart()">Agregar al carrito</div>
+    <div class="back" onclick="closeModal()">← Volver</div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <i class="fa fa-home"></i>
+
+  <div class="cart-icon" onclick="location.href='carrito.html'">
+    <i class="fa fa-shopping-cart"></i>
+    <span id="cartCount">0</span>
+  </div>
+
+  <i class="fa fa-user"></i>
+</div>
+<script>
+const data=[
+  {
+    name:"Nike Ja Morant 3",
+    price:1890,
+    img:"2.jpeg",
+    desc:"Nike Ja Morant 3 (Rosado)",
+    type:"zapato"
+  },
+  {
+    name:"Nike Mind (Blancas)",
+    price:900,
+    img:"3.jpeg",
+    desc:"Nike Mind (Blancas)",
+    type:"zapato"
+  },
+  {
+    name:"Nike TN",
+    price:1390,
+    img:"4.jpeg",
+    desc:"Nike TN Blanco",
+    type:"zapato"
+  },
+  {
+    name:"Metcon 6",
+    price:1450,
+    img:"5.jpeg",
+    desc:"Metcon 6 Todo Blanco",
+    type:"zapato"
+  }
+
+  // Ejemplo de camisa
+  /*
+  ,
+  {
+    name:"Camiseta Jordan",
+    price:650,
+    img:"camisa.jpeg",
+    desc:"Camiseta Jordan",
+    type:"camisa"
+  }
+  */
+];
+
+let selected=null;
+let quantity=1;
+let selectedSize="";
+
+function render(filter=""){
+
+    let html="";
+
+    let filtered=data.filter(p=>
+        p.name.toLowerCase().includes(filter.toLowerCase())
+    );
+
+    if(filtered.length===0){
+        products.innerHTML="<p>No hay resultados</p>";
+        return;
+    }
+
+    filtered.forEach((p)=>{
+
+        html+=`
+        <div class="card" onclick="openDetail(${data.indexOf(p)})">
+            <img src="${p.img}">
+            <div class="info">
+                <h4>${p.name}</h4>
+                <div class="price">C$${p.price}</div>
+            </div>
+        </div>
+        `;
+
+    });
+
+    products.innerHTML=html;
+
+}
+
+/* CONTADOR */
+
+function updateCartCount(){
+
+    let cart=JSON.parse(localStorage.getItem("cart"))||[];
+
+    let total=0;
+
+    cart.forEach(item=>{
+        total+=item.qty;
+    });
+
+    document.getElementById("cartCount").innerText=total;
+
+}
+
+/* ABRIR MODAL */
+
+function openDetail(i){
+
+    selected=data[i];
+    quantity=1;
+    selectedSize="";
+
+    qty.innerText=1;
+
+    dImg.src=selected.img;
+    dName.innerText=selected.name;
+    dDesc.innerText=selected.desc;
+    dPrice.innerText="C$"+selected.price;
+
+    let tallas=[];
+
+    if(selected.type==="zapato"){
+        tallas=["36","37","38","39","40","41","42","43","44"];
+    }
+
+    if(selected.type==="camisa"){
+        tallas=["XS","S","M","L","XL","XXL"];
+    }
+
+    let html="";
+
+    tallas.forEach(t=>{
+
+        html+=`
+        <div class="size" onclick="selectSize(this,'${t}')">
+            ${t}
+        </div>
+        `;
+
+    });
+
+    document.getElementById("sizes").innerHTML=html;
+
+    modal.style.display="block";
+
+}
+
+/* SELECCIONAR TALLA */
+
+function selectSize(el,size){
+
+    document.querySelectorAll(".size").forEach(btn=>{
+        btn.classList.remove("active");
+    });
+
+    el.classList.add("active");
+
+    selectedSize=size;
+
+}
+
+/* CERRAR MODAL */
+
+function closeModal(){
+
+    modal.style.display="none";
+
+}
+
+/* CANTIDAD */
+
+function changeQty(v){
+
+    quantity+=v;
+
+    if(quantity<1){
+        quantity=1;
+    }
+
+    qty.innerText=quantity;
+
+}
+
+/* AGREGAR AL CARRITO */
+
+function addToCart(){
+
+    if(selectedSize===""){
+        alert("Selecciona una talla.");
+        return;
+    }
+
+    let cart=JSON.parse(localStorage.getItem("cart"))||[];
+
+    let exist=cart.find(item=>
+        item.name===selected.name &&
+        item.size===selectedSize
+    );
+
+    if(exist){
+
+        exist.qty+=quantity;
+
+    }else{
+
+        cart.push({
+
+            name:selected.name,
+            price:selected.price,
+            img:selected.img,
+            qty:quantity,
+            size:selectedSize
+
+        });
+
+    }
+
+    localStorage.setItem("cart",JSON.stringify(cart));
+
+    updateCartCount();
+
+    showToast("Agregado al carrito");
+
+    closeModal();
+
+}
+
+/* TOAST */
+
+function showToast(msg){
+
+    let t=document.getElementById("toast");
+
+    t.innerText=msg;
+
+    t.classList.add("show");
+
+    setTimeout(()=>{
+
+        t.classList.remove("show");
+
+    },2000);
+
+}
+
+/* BUSCADOR */
+
+document.getElementById("searchInput").addEventListener("input",function(){
+
+    render(this.value);
+
+});
+
+/* INICIAR */
+
+render();
+updateCartCount();
+
+
+// =========================
+// VARIABLES
+// =========================
+
+let deferredPrompt;
+
+
+// =========================
+// SERVICE WORKER
+// =========================
+
+if ("serviceWorker" in navigator) {
+
+  window.addEventListener("load", () => {
+
+    navigator.serviceWorker.register("/service-worker.js")
+
+    .then((reg) => {
+
+      console.log("SW registrado");
+
+
+      // Detectar actualizaciones
+
+      reg.addEventListener("updatefound", () => {
+
+        const newWorker = reg.installing;
+
+        if (!newWorker) return;
+
+
+        newWorker.addEventListener("statechange", () => {
+
+
+          if(
+            newWorker.state === "installed" &&
+            navigator.serviceWorker.controller
+          ){
+
+            console.log("Nueva versión disponible");
+
+            showUpdateButton(reg);
+
+          }
+
+
+        });
+
+
+      });
+
+
+    })
+
+    .catch(err => console.log("Error SW:",err));
+
+
+  });
+
+}
+
+
+
+// =========================
+// RECARGA AUTOMÁTICA
+// =========================
+
+navigator.serviceWorker?.addEventListener(
+"controllerchange",
+()=>{
+
+window.location.reload();
+
+});
+
+
+
+
+// =========================
+// BOTÓN INSTALAR APP
+// =========================
+
+
+window.addEventListener(
+"beforeinstallprompt",
+(e)=>{
+
+
+e.preventDefault();
+
+
+deferredPrompt=e;
+
+
+showInstallButton();
+
+
+});
+
+
+
+
+// =========================
+// CREAR BOTÓN INSTALAR
+// =========================
+
+function showInstallButton(){
+
+
+let installBtn=document.getElementById("installBtn");
+
+
+if(!installBtn){
+
+
+installBtn=document.createElement("button");
+
+installBtn.id="installBtn";
+
+installBtn.innerText="Instalar HORIZON";
+
+
+
+Object.assign(installBtn.style,{
+
+position:"fixed",
+bottom:"100px",
+right:"20px",
+zIndex:"9999",
+padding:"12px 18px",
+background:"#000",
+color:"#fff",
+border:"none",
+borderRadius:"30px",
+fontWeight:"600",
+fontSize:"14px",
+cursor:"pointer",
+boxShadow:"0 5px 20px rgba(0,0,0,.25)"
+
+});
+
+
+document.body.appendChild(installBtn);
+
+
+
+installBtn.onclick=installApp;
+
+
+}
+
+
+
+installBtn.style.display="block";
+
+
+}
+
+
+
+// =========================
+// INSTALAR APP
+// =========================
+
+function installApp(){
+
+
+if(!deferredPrompt) return;
+
+
+
+deferredPrompt.prompt();
+
+
+
+deferredPrompt.userChoice.then(
+(choice)=>{
+
+
+if(choice.outcome==="accepted"){
+
+console.log("HORIZON instalada");
+
+
+let btn=document.getElementById("installBtn");
+
+if(btn){
+
+btn.remove();
+
+}
+
+
+}
+
+
+deferredPrompt=null;
+
+
+});
+
+
+}
+
+
+
+
+// =========================
+// BOTÓN ACTUALIZAR APP
+// =========================
+
+
+function showUpdateButton(reg){
+
+
+let updateBtn=document.getElementById("updateBtn");
+
+
+if(!updateBtn){
+
+
+updateBtn=document.createElement("button");
+
+updateBtn.id="updateBtn";
+
+updateBtn.innerText="Actualizar App";
+
+
+Object.assign(updateBtn.style,{
+
+position:"fixed",
+bottom:"100px",
+right:"20px",
+zIndex:"9999",
+padding:"12px 16px",
+background:"#ff6b00",
+color:"#fff",
+border:"none",
+borderRadius:"10px",
+cursor:"pointer"
+
+});
+
+
+document.body.appendChild(updateBtn);
+
+
+}
+
+
+
+updateBtn.style.display="block";
+
+
+
+updateBtn.onclick=()=>{
+
+
+const waitingSW=reg.waiting;
+
+
+
+if(!waitingSW){
+
+window.location.reload();
+
+return;
+
+}
+
+
+
+waitingSW.postMessage({
+
+type:"SKIP_WAITING"
+
+});
+
+
+};
+
+
+
+}
+</script>
+
+</body>
+</html>

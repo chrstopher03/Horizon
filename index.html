@@ -41,7 +41,7 @@ body{
 
 /* SEARCH */
 .search{
-  border-bottom:1px solid #e8cfd6;
+  border-bottom:1px solid #7b7b7b;
   padding:5px 10px;
 }
 
@@ -328,6 +328,368 @@ body{
   color:#fff;
   border-color:#000;
 }
+
+/* =======================
+   COMUNICADO
+======================= */
+
+.notice-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+    padding:20px;
+}
+.notice-box{
+    background:#fff;
+    max-width:420px;
+    width:100%;
+    border-radius:25px;
+    padding:30px 25px;
+    text-align:center;
+    animation:popup .35s ease;
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+}
+
+.notice-logo{
+    width:120px;
+    margin-bottom:15px;
+}
+
+.notice-box h2{
+    font-family:'Playfair Display',serif;
+    margin-bottom:15px;
+    font-size:28px;
+}
+
+.notice-box p{
+    color:#555;
+    line-height:1.7;
+    margin-bottom:14px;
+    font-size:15px;
+}
+
+.notice-box button{
+    width:100%;
+    margin-top:10px;
+    padding:15px;
+    border:none;
+    border-radius:15px;
+    background:#000;
+    color:#fff;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+}
+.imgBox{
+position:relative;
+}
+
+
+.imgBox img{
+width:100%;
+transition:.3s;
+}
+
+
+.card.agotado img{
+
+filter:grayscale(100%);
+opacity:.35;
+
+}
+
+
+.soldOut{
+
+position:absolute;
+
+top:50%;
+left:50%;
+
+transform:translate(-50%,-50%);
+
+background:#000;
+
+color:#fff;
+
+
+font-weight:bold;
+
+border-radius:6px;
+
+}
+
+
+.card.agotado{
+
+cursor:not-allowed;
+
+}
+.notice-box button:hover{
+    opacity:.9;
+}
+
+@keyframes popup{
+    from{
+        opacity:0;
+        transform:scale(.8);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+.customAlert{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,.55);
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+z-index:9999;
+
+backdrop-filter:blur(5px);
+
+}
+
+
+
+.alertContent{
+
+background:white;
+
+width:320px;
+
+padding:30px;
+
+border-radius:18px;
+
+text-align:center;
+
+animation:showAlert .25s ease;
+
+}
+
+
+
+.alertIcon{
+
+width:55px;
+height:55px;
+
+margin:auto;
+
+background:#000;
+
+color:white;
+
+border-radius:50%;
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+font-size:30px;
+
+font-weight:bold;
+
+}
+
+
+
+.alertContent h3{
+
+margin-top:15px;
+
+font-size:22px;
+
+}
+
+
+
+.alertContent p{
+
+color:#666;
+
+font-size:15px;
+
+}
+
+
+
+.alertContent button{
+
+margin-top:20px;
+
+width:100%;
+
+padding:12px;
+
+border:none;
+
+background:#000;
+
+color:white;
+
+border-radius:10px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+
+/* =======================
+   FOOTER HORIZON
+======================= */
+
+.footer{
+  background:#ffffff;
+  color:#000000;
+  padding:40px 20px 110px;
+  text-align:center;
+  margin-top:40px;
+}
+
+.footer-logo{
+  font-family:'Playfair Display',serif;
+  font-size:32px;
+  font-weight:700;
+  letter-spacing:3px;
+  margin-bottom:12px;
+}
+
+.footer p{
+  color:#bdbdbd;
+  font-size:14px;
+  line-height:1.7;
+}
+
+
+.footer-links{
+  display:flex;
+  justify-content:center;
+  gap:25px;
+  flex-wrap:wrap;
+  margin:25px 0;
+}
+
+
+.footer-links a{
+  color:#fff;
+  text-decoration:none;
+  font-size:13px;
+  transition:.3s;
+}
+
+
+.footer-links a:hover{
+  opacity:.6;
+}
+
+
+/* REDES */
+
+.footer-social{
+  display:flex;
+  justify-content:center;
+  gap:18px;
+  margin:25px 0;
+}
+
+
+.footer-social a{
+  text-decoration:none;
+}
+
+
+.footer-social i{
+
+  width:45px;
+  height:45px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:#fff;
+  color:#000;
+
+  border-radius:50%;
+
+  font-size:21px;
+
+  transition:.3s;
+
+}
+
+
+.footer-social i:hover{
+
+  transform:translateY(-5px);
+
+}
+
+
+/* COPYRIGHT */
+
+.footer-copy{
+
+  border-top:1px solid #333;
+
+  padding-top:18px;
+
+  margin-top:20px;
+
+  color:#777;
+
+  font-size:12px;
+
+}
+.alertContent button:hover{
+
+opacity:.8;
+
+}
+
+
+
+@keyframes showAlert{
+
+from{
+
+transform:scale(.8);
+
+opacity:0;
+
+}
+
+to{
+
+transform:scale(1);
+
+opacity:1;
+
+}
+
+}
 </style>
 </head>
 
@@ -386,265 +748,822 @@ body{
 
   <i class="fa fa-user"></i>
 </div>
-<script>
-const data=[
-  {
-    name:"Nike Ja Morant 3",
-    price:1890,
-    img:"2.jpeg",
-    desc:"Nike Ja Morant 3 (Rosado)",
-    type:"zapato"
-  },
-  {
-    name:"Nike Mind (Blancas)",
-    price:900,
-    img:"3.jpeg",
-    desc:"Nike Mind (Blancas)",
-    type:"zapato"
-  },
-  {
-    name:"Nike TN",
-    price:1390,
-    img:"4.jpeg",
-    desc:"Nike TN Blanco",
-    type:"zapato"
-  },
-  {
-    name:"Metcon 6",
-    price:1450,
-    img:"5.jpeg",
-    desc:"Metcon 6 Todo Blanco",
-    type:"zapato"
-  },
+<!-- COMUNICADO -->
+<div id="noticeModal" class="notice-overlay">
+  <div class="notice-box">
 
-  // Ejemplo de camisa
-  /*
-  ,
-  {
-    name:"Camiseta Jordan",
-    price:650,
-    img:"camisa.jpeg",
-    desc:"Camiseta Jordan",
-    type:"camisa"
-  }
-  */
+    <img src="1.jpeg" class="notice-logo">
 
-  
-  {
-    name:"Camiseta Kappa",
-    price:750,
-    img:"6.jpeg",
-    desc:"Camiseta Kappa (Negra)",
-    type:"camisa"
-  }
+    <h2>Comunicado</h2>
+
+    <p>
+      Les informamos que todos los <b>zapatos</b> y <b>Crocs</b> se trabajan
+      únicamente <b>por pedido</b>.
+    </p>
+
+    <p>
+      Para confirmar el pedido es necesario realizar un
+      <b>adelanto del 50%</b> del valor total del producto.
+    </p>
+
+    <p>
+      Gracias por su comprensión y por confiar en
+      <b>HORIZON</b>.
+    </p>
+
+    <button onclick="closeNotice()">
+      Entendido
+    </button>
+
+  </div>
+</div>
+
+<!-- FOOTER HORIZON -->
+
+<footer class="footer">
+
+
+
+
+  <div class="footer-copy">
+
+    © 2026 HORIZON<br>
+    Todos los derechos reservados.
+
+  </div>
+
+
+</footer>
+<script>const data = [
+
+{
+name:"Nike Ja Morant 3",
+price:1890,
+img:"2.jpeg",
+desc:"Nike Ja Morant 3 (Rosado)",
+type:"zapato",
+
+stock:true,
+
+sizes:{
+"38":true,
+"39":true,
+"40":false,
+"41":true,
+"42":false
+}
+
+},
+
+
+{
+name:"Nike Mind (Blancas)",
+price:900,
+img:"3.jpeg",
+desc:"Nike Mind (Blancas)",
+type:"zapato",
+
+stock:false,
+
+sizes:{
+"36":true,
+"37":true,
+"38":true,
+"39":false,
+"40":true,
+"41":true
+}
+
+},
+
+
+{
+name:"Nike TN",
+price:1390,
+img:"4.jpeg",
+desc:"Nike TN Blanco",
+type:"zapato",
+
+stock:true,
+
+sizes:{
+"39":true,
+"40":true,
+"41":false,
+"42":true,
+"43":true,
+"44":false
+}
+
+},
+
+
+{
+name:"Metcon 6",
+price:1450,
+img:"5.jpeg",
+desc:"Metcon 6 Todo Blanco",
+type:"zapato",
+
+stock:true,
+
+sizes:{
+"37":true,
+"38":true,
+"39":false,
+"40":true,
+"41":true,
+"42":true
+}
+
+},
+
+
+{
+name:"Camiseta Kappa",
+price:750,
+img:"6.jpeg",
+desc:"Camiseta Kappa Negra",
+type:"camisa",
+
+stock:true,
+
+sizes:{
+"S":true,
+"M":true,
+"L":false,
+"XL":true,
+"XXL":false
+}
+
+},
+
+
+{
+name:"Camiseta Kappa",
+price:480,
+img:"7.jpeg",
+desc:"Camiseta Kappa Negra",
+type:"camisa",
+
+stock:true,
+
+sizes:{
+"S":true,
+"M":true,
+"L":false,
+"XL":true,
+"XXL":false
+}
+
+},
+
+{
+name:"Crocs del rayo mcqueen",
+price:1450,
+img:"8.jpeg",
+desc:"Crocs del rayo maqueen",
+type:"crocs",
+
+stock:true,
+
+sizes:{
+"37":true,
+"38":true,
+"39":false,
+"40":true,
+"41":true,
+"42":true
+}
+
+},
+
+
+{
+name:"Crocs de mate",
+price:1450,
+img:"9.jpeg",
+desc:"Crocs de mate",
+type:"crocs",
+
+stock:true,
+
+sizes:{
+"37":true,
+"38":true,
+"39":false,
+"40":true,
+"41":true,
+"42":true
+}
+
+},
+
+{
+name:"Crocs de batman",
+price:1450,
+img:"10.jpeg",
+desc:"Crocs de batman",
+type:"crocs",
+
+stock:true,
+
+sizes:{
+"37":true,
+"38":true,
+"39":false,
+"40":true,
+"41":true,
+"42":true
+}
+
+},
 ];
+
+
 
 let selected=null;
 let quantity=1;
 let selectedSize="";
 
+
+
+
+
+/* RENDER */
+
 function render(filter=""){
 
-    let html="";
+const products=document.getElementById("products");
 
-    let filtered=data.filter(p=>
-        p.name.toLowerCase().includes(filter.toLowerCase())
-    );
+filter=filter.toLowerCase();
 
-    if(filtered.length===0){
-        products.innerHTML="<p>No hay resultados</p>";
-        return;
-    }
 
-    filtered.forEach((p)=>{
+const filtered=data.filter(product=>
 
-        html+=`
-        <div class="card" onclick="openDetail(${data.indexOf(p)})">
-            <img src="${p.img}">
-            <div class="info">
-                <h4>${p.name}</h4>
-                <div class="price">C$${p.price}</div>
-            </div>
-        </div>
-        `;
+product.name.toLowerCase().includes(filter) ||
 
-    });
+product.desc.toLowerCase().includes(filter)
 
-    products.innerHTML=html;
+);
+
+
+
+if(!filtered.length){
+
+products.innerHTML="<p>No hay resultados.</p>";
+return;
 
 }
+
+
+
+products.innerHTML=filtered.map(product=>`
+
+<div class="card ${product.stock===false?'agotado':''}"
+
+onclick="${
+product.stock===false
+?'showToast("Producto agotado")'
+:`openDetail(${data.indexOf(product)})`
+}">
+
+
+<div class="imgBox">
+
+<img src="${product.img}">
+
+
+${
+product.stock===false
+?
+`<div class="soldOut">AGOTADO</div>`
+:""
+}
+
+
+</div>
+
+
+<div class="info">
+
+<h4>${product.name}</h4>
+
+
+<div class="price">
+
+C$${product.price}
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+`).join("");
+
+}
+
+
+
+
+
+
 
 /* CONTADOR */
 
 function updateCartCount(){
 
-    let cart=JSON.parse(localStorage.getItem("cart"))||[];
+let cart=JSON.parse(localStorage.getItem("cart"))||[];
 
-    let total=0;
 
-    cart.forEach(item=>{
-        total+=item.qty;
-    });
+let total=cart.reduce((sum,item)=>{
 
-    document.getElementById("cartCount").innerText=total;
+return sum+item.qty;
+
+},0);
+
+
+
+document.getElementById("cartCount").innerText=total;
+
+
+}
+
+
+
+
+
+
+
+
+/* ABRIR PRODUCTO */
+
+function openDetail(index){
+
+
+selected=data[index];
+
+
+// seguridad
+
+if(selected.stock===false){
+
+showToast("Producto agotado");
+
+return;
 
 }
 
-/* ABRIR MODAL */
 
-function openDetail(i){
 
-    selected=data[i];
-    quantity=1;
-    selectedSize="";
+quantity=1;
 
-    qty.innerText=1;
+selectedSize="";
 
-    dImg.src=selected.img;
-    dName.innerText=selected.name;
-    dDesc.innerText=selected.desc;
-    dPrice.innerText="C$"+selected.price;
 
-    let tallas=[];
+document.getElementById("qty").innerText=quantity;
 
-    if(selected.type==="zapato"){
-        tallas=["36","37","38","39","40","41","42","43","44"];
-    }
 
-    if(selected.type==="camisa"){
-        tallas=["XS","S","M","L","XL","XXL"];
-    }
+document.getElementById("dImg").src=selected.img;
 
-    let html="";
 
-    tallas.forEach(t=>{
+document.getElementById("dName").innerText=selected.name;
 
-        html+=`
-        <div class="size" onclick="selectSize(this,'${t}')">
-            ${t}
-        </div>
-        `;
 
-    });
+document.getElementById("dDesc").innerText=selected.desc;
 
-    document.getElementById("sizes").innerHTML=html;
 
-    modal.style.display="block";
+document.getElementById("dPrice").innerText="C$"+selected.price;
+
+
+
+
+document.getElementById("sizes").innerHTML=
+
+
+Object.keys(selected.sizes).map(size=>`
+
+
+<div class="size ${selected.sizes[size] ? "" : "disabled"}"
+
+
+onclick="${
+
+selected.sizes[size]
+
+?
+
+`selectSize(this,'${size}')`
+
+:
+
+""
+
+}">
+
+
+${size}
+
+
+${
+
+selected.sizes[size]
+
+?
+
+""
+
+:
+
+"<small>Agotada</small>"
 
 }
+
+
+</div>
+
+
+`).join("");
+
+
+
+
+document.getElementById("modal").style.display="block";
+
+
+}
+
+
+
+
+
+
+
 
 /* SELECCIONAR TALLA */
 
-function selectSize(el,size){
 
-    document.querySelectorAll(".size").forEach(btn=>{
-        btn.classList.remove("active");
-    });
+function selectSize(element,size){
 
-    el.classList.add("active");
 
-    selectedSize=size;
+document.querySelectorAll(".size").forEach(btn=>{
 
-}
-
-/* CERRAR MODAL */
-
-function closeModal(){
-
-    modal.style.display="none";
-
-}
-
-/* CANTIDAD */
-
-function changeQty(v){
-
-    quantity+=v;
-
-    if(quantity<1){
-        quantity=1;
-    }
-
-    qty.innerText=quantity;
-
-}
-
-/* AGREGAR AL CARRITO */
-
-function addToCart(){
-
-    if(selectedSize===""){
-        alert("Selecciona una talla.");
-        return;
-    }
-
-    let cart=JSON.parse(localStorage.getItem("cart"))||[];
-
-    let exist=cart.find(item=>
-        item.name===selected.name &&
-        item.size===selectedSize
-    );
-
-    if(exist){
-
-        exist.qty+=quantity;
-
-    }else{
-
-        cart.push({
-
-            name:selected.name,
-            price:selected.price,
-            img:selected.img,
-            qty:quantity,
-            size:selectedSize
-
-        });
-
-    }
-
-    localStorage.setItem("cart",JSON.stringify(cart));
-
-    updateCartCount();
-
-    showToast("Agregado al carrito");
-
-    closeModal();
-
-}
-
-/* TOAST */
-
-function showToast(msg){
-
-    let t=document.getElementById("toast");
-
-    t.innerText=msg;
-
-    t.classList.add("show");
-
-    setTimeout(()=>{
-
-        t.classList.remove("show");
-
-    },2000);
-
-}
-
-/* BUSCADOR */
-
-document.getElementById("searchInput").addEventListener("input",function(){
-
-    render(this.value);
+btn.classList.remove("active");
 
 });
 
-/* INICIAR */
 
-render();
+element.classList.add("active");
+
+
+selectedSize=size;
+
+
+}
+
+
+
+
+
+
+
+
+/* CERRAR */
+
+
+function closeModal(){
+
+document.getElementById("modal").style.display="none";
+
+}
+
+
+
+
+
+
+
+
+/* CANTIDAD */
+
+
+function changeQty(value){
+
+
+quantity+=value;
+
+
+if(quantity<1){
+
+quantity=1;
+
+}
+
+
+document.getElementById("qty").innerText=quantity;
+
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   CARRITO
+========================= */
+
+
+function addToCart(){
+
+
+if(selected.stock===false){
+
+showAlert("Este producto está agotado.");
+
+return;
+
+}
+
+
+
+if(selectedSize===""){
+
+showAlert("Selecciona una talla antes de continuar.");
+
+return;
+
+}
+
+
+
+if(!selected.sizes[selectedSize]){
+
+showAlert("Esta talla está agotada.");
+
+return;
+
+}
+
+
+
+let cart=JSON.parse(localStorage.getItem("cart"))||[];
+
+
+
+
+let exist=cart.find(item=>
+
+item.name===selected.name &&
+
+item.size===selectedSize
+
+);
+
+
+
+
+if(exist){
+
+
+exist.qty+=quantity;
+
+
+}else{
+
+
+cart.push({
+
+name:selected.name,
+
+price:selected.price,
+
+img:selected.img,
+
+qty:quantity,
+
+size:selectedSize
+
+});
+
+
+}
+
+
+
+
+
+localStorage.setItem("cart",JSON.stringify(cart));
+
+
+
 updateCartCount();
 
 
+
+showToast("Agregado al carrito");
+
+
+
+closeModal();
+
+
+}
+
+
+
+
+
+
+
+/* =========================
+   ALERTA PROFESIONAL
+========================= */
+
+
+function showAlert(message){
+
+
+let oldAlert=document.querySelector(".customAlert");
+
+
+if(oldAlert){
+
+oldAlert.remove();
+
+}
+
+
+
+let alertBox=document.createElement("div");
+
+
+alertBox.className="customAlert";
+
+
+alertBox.innerHTML=`
+
+<div class="alertContent">
+
+
+<div class="alertIcon">
+!
+</div>
+
+
+<h3>Atención</h3>
+
+
+<p>${message}</p>
+
+
+<button onclick="closeAlert()">
+
+Entendido
+
+</button>
+
+
+</div>
+
+`;
+
+
+
+document.body.appendChild(alertBox);
+
+
+
+}
+
+
+
+
+
+
+function closeAlert(){
+
+
+let alertBox=document.querySelector(".customAlert");
+
+
+if(alertBox){
+
+alertBox.remove();
+
+}
+
+
+}
+
+
+
+
+
+/* TOAST */
+
+
+function showToast(msg){
+
+
+let toast=document.getElementById("toast");
+
+
+toast.innerText=msg;
+
+
+toast.classList.add("show");
+
+
+
+setTimeout(()=>{
+
+
+toast.classList.remove("show");
+
+
+},2000);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* BUSCADOR */
+
+
+document.getElementById("searchInput")
+
+.addEventListener("input",function(){
+
+
+render(this.value);
+
+
+});
+
+
+
+
+
+
+
+
+
+/* COMUNICADO */
+
+
+const noticeModal=document.getElementById("noticeModal");
+
+
+
+window.addEventListener("load",()=>{
+
+
+noticeModal.style.display="flex";
+
+
+});
+
+
+
+
+function closeNotice(){
+
+
+noticeModal.style.display="none";
+
+
+}
+
+
+
+
+
+
+
+
+
+/* INICIO */
+
+
+render();
+
+updateCartCount();
 // =========================
 // VARIABLES
 // =========================

@@ -19,26 +19,46 @@ body{
   background:#ffffff;
   color:#161616;
 }
-
-/* HEADER */
 .header{
-  position:sticky;
-  top:0;
-  background:#ffffffd9;
-  backdrop-filter:blur(12px);
-  padding:14px 18px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid #ffffff;
-  z-index:10;
+    position:sticky;
+    top:0;
+    background:#ffffffd9;
+    backdrop-filter:blur(12px);
+    height:65px;
+    padding:0 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid #eee;
+    z-index:100;
+    position:sticky;
 }
 
-.header h1{
-  font-family:'Playfair Display',serif;
-  font-size:20px;
+/* LOGO CENTRADO */
+.brand{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    margin:0;
+
+    font-family:'Playfair Display',serif;
+    font-size:20px;
+    font-weight:700;
+    cursor:pointer;
+    user-select:none;
 }
 
+/* Iconos */
+.header > i,
+.header-icons{
+    z-index:2;
+}
+
+.header-icons{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
 /* SEARCH */
 .search{
   border-bottom:1px solid #7b7b7b;
@@ -581,7 +601,45 @@ cursor:pointer;
   font-size:14px;
   line-height:1.7;
 }
+.header-icons{
 
+display:flex;
+align-items:center;
+gap:18px;
+
+}
+
+
+.mujer-icon{
+
+font-size:18px;
+cursor:pointer;
+
+}
+
+
+.mujer-icon.active{
+
+background:#000;
+color:white;
+
+width:30px;
+height:30px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+border-radius:50%;
+
+}
+
+
+.cart-icon-header{
+
+cursor:pointer;
+
+}
 
 .footer-links{
   display:flex;
@@ -619,7 +677,52 @@ cursor:pointer;
   text-decoration:none;
 }
 
+/* ===== GALERÍA DEL MODAL ===== */
 
+.gallery{
+display:flex;
+gap:10px;
+margin-top:15px;
+overflow-x:auto;
+padding-bottom:5px;
+}
+
+.gallery::-webkit-scrollbar{
+height:5px;
+}
+
+.gallery img{
+
+width:70px;
+height:70px;
+
+object-fit:cover;
+
+border-radius:12px;
+
+padding:4px;
+
+background:#fff;
+
+border:2px solid transparent;
+
+cursor:pointer;
+
+transition:.25s;
+
+}
+
+.gallery img:hover{
+
+transform:scale(1.05);
+
+}
+
+.gallery img.active{
+
+border-color:#000;
+
+}
 .footer-social i{
 
   width:45px;
@@ -647,7 +750,92 @@ cursor:pointer;
 
 }
 
+:root{
+    --primary:#000;
+    --primary-light:#111;
+}
 
+body{
+    transition:.3s;
+}
+
+.buy,
+.qty-box button,
+.filters button,
+.alertIcon,
+.alertContent button{
+    background:var(--primary);
+    transition:.3s;
+}
+
+.price{
+    color:var(--primary);
+    transition:.3s;
+}
+
+.size.active{
+    background:var(--primary);
+    border-color:var(--primary);
+}
+
+.size:hover{
+    background:var(--primary);
+}
+
+/* ===== MODO MUJER ===== */
+
+body.women-theme{
+    --primary:#ff7eb6;
+    --primary-light:#ffd9e8;
+    background:#fff7fb;
+}
+
+body.women-theme .header{
+    background:#fff0f6;
+    border-bottom:1px solid #ffd6e7;
+}
+
+body.women-theme .search{
+    border-bottom:1px solid #ffc3da;
+}
+
+body.women-theme .card{
+    box-shadow:0 8px 20px rgba(255,126,182,.15);
+}
+
+body.women-theme .buy{
+    background:#ff7eb6;
+}
+
+body.women-theme .qty-box button{
+    background:#ff7eb6;
+}
+
+body.women-theme .size.active{
+    background:#ff7eb6;
+    border-color:#ff7eb6;
+}
+
+body.women-theme .size:hover{
+    background:#ff7eb6;
+}
+
+body.women-theme .price{
+    color:#ff5d9e;
+}
+
+body.women-theme .mujer-icon{
+    color:#ff5d9e;
+}
+
+body.women-theme .toast{
+    background:#ff7eb6;
+}
+
+body.women-theme .alertIcon,
+body.women-theme .alertContent button{
+    background:#ff7eb6;
+}
 /* COPYRIGHT */
 
 .footer-copy{
@@ -692,16 +880,26 @@ opacity:1;
 }
 </style>
 </head>
-
 <body>
+
 <div class="header">
+
   <i class="fa fa-bars"></i>
 
-  <h1 class="brand">
-    HORIZON</span>
+  <h1 class="brand" onclick="showAll()">
+    HORIZON
   </h1>
 
-  <i class="fa fa-shopping-bag" onclick="location.href='carrito.html'"></i>
+  <div class="header-icons">
+
+    <i class="fa-solid fa-venus mujer-icon" onclick="showWomen()"></i>
+
+    <div class="cart-icon-header" onclick="location.href='carrito.html'">
+      <i class="fa fa-shopping-bag"></i>
+    </div>
+
+  </div>
+
 </div>
 
 <div class="search">
@@ -712,44 +910,86 @@ opacity:1;
   <div class="grid" id="products"></div>
 </div>
 
-<div id="toast" class="toast">Agregado </div>
-
-<!-- MODAL -->
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <img id="dImg">
-    <h2 id="dName"></h2>
-    <p id="dDesc"></p>
-    <h3 id="dPrice"></h3>
-<div class="size-box" id="sizeBox">
-  <h4>Selecciona una talla</h4>
-
-  <div class="sizes" id="sizes"></div>
+<div id="toast" class="toast">
+  Agregado
 </div>
-    <div class="qty-box">
-      <button onclick="changeQty(-1)">-</button>
-      <span id="qty">1</span>
-      <button onclick="changeQty(1)">+</button>
+
+<!-- =========================
+     MODAL PRODUCTO
+========================= -->
+
+<div class="modal" id="modal">
+
+  <div class="modal-content">
+
+    <!-- Imagen principal -->
+    <img id="dImg">
+
+    <!-- Miniaturas -->
+    <div class="gallery" id="gallery"></div>
+
+    <h2 id="dName"></h2>
+
+    <p id="dDesc"></p>
+
+    <h3 id="dPrice"></h3>
+
+    <div class="size-box" id="sizeBox">
+
+      <h4>Selecciona una talla</h4>
+
+      <div class="sizes" id="sizes"></div>
+
     </div>
 
-    <div class="buy" onclick="addToCart()">Agregar al carrito</div>
-    <div class="back" onclick="closeModal()">← Volver</div>
+    <div class="qty-box">
+
+      <button onclick="changeQty(-1)">-</button>
+
+      <span id="qty">1</span>
+
+      <button onclick="changeQty(1)">+</button>
+
+    </div>
+
+    <div class="buy" onclick="addToCart()">
+      Agregar al carrito
+    </div>
+
+    <div class="back" onclick="closeModal()">
+      ← Volver
+    </div>
+
   </div>
+
 </div>
 
-<!-- NAV -->
+<!-- =========================
+     NAVEGACIÓN
+========================= -->
+
 <div class="nav">
-  <i class="fa fa-home"></i>
+
+  <i class="fa fa-home" onclick="showAll()"></i>
 
   <div class="cart-icon" onclick="location.href='carrito.html'">
+
     <i class="fa fa-shopping-cart"></i>
+
     <span id="cartCount">0</span>
+
   </div>
 
   <i class="fa fa-user"></i>
+
 </div>
-<!-- COMUNICADO -->
+
+<!-- =========================
+     COMUNICADO
+========================= -->
+
 <div id="noticeModal" class="notice-overlay">
+
   <div class="notice-box">
 
     <img src="1.jpeg" class="notice-logo">
@@ -757,18 +997,15 @@ opacity:1;
     <h2>Comunicado</h2>
 
     <p>
-      Les informamos que todos los <b>zapatos</b> y <b>Crocs</b> se trabajan
-      únicamente <b>por pedido</b>.
+      Les informamos que todos los <b>zapatos</b> y <b>Crocs</b> se trabajan únicamente <b>por pedido</b>.
     </p>
 
     <p>
-      Para confirmar el pedido es necesario realizar un
-      <b>adelanto del 50%</b> del valor total del producto.
+      Para confirmar el pedido es necesario realizar un <b>adelanto del 50%</b> del valor total del producto.
     </p>
 
     <p>
-      Gracias por su comprensión y por confiar en
-      <b>HORIZON</b>.
+      Gracias por su comprensión y por confiar en <b>HORIZON</b>.
     </p>
 
     <button onclick="closeNotice()">
@@ -776,22 +1013,19 @@ opacity:1;
     </button>
 
   </div>
+
 </div>
 
-<!-- FOOTER HORIZON -->
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer class="footer">
 
-
-
-
   <div class="footer-copy">
-
     © 2026 HORIZON<br>
     Todos los derechos reservados.
-
   </div>
-
 
 </footer>
 <script>const data = [
@@ -799,9 +1033,15 @@ opacity:1;
 {
 name:"Nike Ja Morant 3",
 price:1890,
-img:"2.jpeg",
+images:[
+"2.jpeg",
+"2.jpeg",
+"2-2.jpeg",
+"2-3.jpeg"
+],
 desc:"Nike Ja Morant 3 (Rosado)",
 type:"zapato",
+genero:"hombre",
 
 stock:true,
 
@@ -812,7 +1052,6 @@ sizes:{
 "41":true,
 "42":false
 }
-
 },
 
 
@@ -822,8 +1061,9 @@ price:900,
 img:"3.jpeg",
 desc:"Nike Mind (Blancas)",
 type:"zapato",
+genero:"mujer",
 
-stock:false,
+stock:true,
 
 sizes:{
 "36":true,
@@ -843,6 +1083,7 @@ price:1390,
 img:"4.jpeg",
 desc:"Nike TN Blanco",
 type:"zapato",
+genero:"hombre",
 
 stock:true,
 
@@ -864,6 +1105,7 @@ price:1450,
 img:"5.jpeg",
 desc:"Metcon 6 Todo Blanco",
 type:"zapato",
+genero:"hombre",
 
 stock:true,
 
@@ -885,6 +1127,7 @@ price:750,
 img:"6.jpeg",
 desc:"Camiseta Kappa Negra",
 type:"camisa",
+genero:"mujer",
 
 stock:true,
 
@@ -905,6 +1148,7 @@ price:480,
 img:"7.jpeg",
 desc:"Camiseta Kappa Negra",
 type:"camisa",
+genero:"hombre",
 
 stock:true,
 
@@ -918,12 +1162,34 @@ sizes:{
 
 },
 
+
+{
+name:"Camiseta Kappa",
+price:730,
+img:"11.jpeg",
+desc:"Camiseta Kappa Negra",
+type:"camisa",
+genero:"hombre",
+
+stock:true,
+
+sizes:{
+"S":true,
+"M":true,
+"L":false,
+"XL":true,
+"XXL":false
+}
+
+},
+ 
 {
 name:"Crocs del rayo mcqueen",
 price:1450,
 img:"8.jpeg",
-desc:"Crocs del rayo maqueen",
+desc:"Crocs del rayo mcqueen",
 type:"crocs",
+genero:"hombre",
 
 stock:true,
 
@@ -945,6 +1211,7 @@ price:1450,
 img:"9.jpeg",
 desc:"Crocs de mate",
 type:"crocs",
+genero:"mujer",
 
 stock:true,
 
@@ -958,6 +1225,7 @@ sizes:{
 }
 
 },
+
 
 {
 name:"Crocs de batman",
@@ -965,6 +1233,7 @@ price:1450,
 img:"10.jpeg",
 desc:"Crocs de batman",
 type:"crocs",
+genero:"hombre",
 
 stock:true,
 
@@ -977,589 +1246,508 @@ sizes:{
 "42":true
 }
 
-},
+}
+
 ];
 
-
-
-let selected=null;
-let quantity=1;
-let selectedSize="";
-
-
-
-
-
-/* RENDER */
-
-function render(filter=""){
-
-const products=document.getElementById("products");
-
-filter=filter.toLowerCase();
-
-
-const filtered=data.filter(product=>
-
-product.name.toLowerCase().includes(filter) ||
-
-product.desc.toLowerCase().includes(filter)
-
-);
-
-
-
-if(!filtered.length){
-
-products.innerHTML="<p>No hay resultados.</p>";
-return;
-
-}
-
-
-
-products.innerHTML=filtered.map(product=>`
-
-<div class="card ${product.stock===false?'agotado':''}"
-
-onclick="${
-product.stock===false
-?'showToast("Producto agotado")'
-:`openDetail(${data.indexOf(product)})`
-}">
-
-
-<div class="imgBox">
-
-<img src="${product.img}">
-
-
-${
-product.stock===false
-?
-`<div class="soldOut">AGOTADO</div>`
-:""
-}
-
-
-</div>
-
-
-<div class="info">
-
-<h4>${product.name}</h4>
-
-
-<div class="price">
-
-C$${product.price}
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-`).join("");
-
-}
-
-
-
-
-
-
-
-/* CONTADOR */
+/* =========================
+   CONTADOR CARRITO
+========================= */
 
 function updateCartCount(){
 
-let cart=JSON.parse(localStorage.getItem("cart"))||[];
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+    let total = cart.reduce((sum,item)=>sum+item.qty,0);
 
-let total=cart.reduce((sum,item)=>{
-
-return sum+item.qty;
-
-},0);
-
-
-
-document.getElementById("cartCount").innerText=total;
-
+    document.getElementById("cartCount").innerText = total;
 
 }
 
 
-
-
-
-
-
-
-/* ABRIR PRODUCTO */
+/* =========================
+   ABRIR PRODUCTO
+========================= */
 
 function openDetail(index){
 
+    selected = data[index];
 
-selected=data[index];
+    if(selected.stock===false){
 
+        showToast("Producto agotado");
 
-// seguridad
+        return;
 
-if(selected.stock===false){
+    }
 
-showToast("Producto agotado");
+    quantity = 1;
+    selectedSize = "";
 
-return;
+    document.getElementById("qty").innerText = quantity;
 
-}
+    // Obtener imágenes del producto
+    const images = selected.images || [selected.img];
 
+    // Imagen principal
+    document.getElementById("dImg").src = images[0];
 
+    // Crear galería
+    const gallery = document.getElementById("gallery");
 
-quantity=1;
+    if(gallery){
 
-selectedSize="";
+        gallery.innerHTML = images.map((img,i)=>`
 
+            <img
+                src="${img}"
+                class="${i===0 ? "active" : ""}"
+                onclick="changeImage('${img}',this)">
 
-document.getElementById("qty").innerText=quantity;
+        `).join("");
 
+    }
 
-document.getElementById("dImg").src=selected.img;
+    document.getElementById("dName").innerText = selected.name;
+    document.getElementById("dDesc").innerText = selected.desc;
+    document.getElementById("dPrice").innerText = "C$"+selected.price;
 
+    document.getElementById("sizes").innerHTML =
 
-document.getElementById("dName").innerText=selected.name;
+    Object.keys(selected.sizes).map(size=>`
 
+        <div class="size ${selected.sizes[size] ? "" : "disabled"}"
+        onclick="${selected.sizes[size] ? `selectSize(this,'${size}')` : ""}">
 
-document.getElementById("dDesc").innerText=selected.desc;
+            ${size}
 
+            ${selected.sizes[size] ? "" : "<small>Agotada</small>"}
 
-document.getElementById("dPrice").innerText="C$"+selected.price;
+        </div>
 
+    `).join("");
 
-
-
-document.getElementById("sizes").innerHTML=
-
-
-Object.keys(selected.sizes).map(size=>`
-
-
-<div class="size ${selected.sizes[size] ? "" : "disabled"}"
-
-
-onclick="${
-
-selected.sizes[size]
-
-?
-
-`selectSize(this,'${size}')`
-
-:
-
-""
-
-}">
-
-
-${size}
-
-
-${
-
-selected.sizes[size]
-
-?
-
-""
-
-:
-
-"<small>Agotada</small>"
+    document.getElementById("modal").style.display="block";
 
 }
 
 
-</div>
+/* =========================
+   CAMBIAR IMAGEN
+========================= */
 
+function changeImage(img,element){
 
-`).join("");
+    document.getElementById("dImg").src = img;
 
+    document.querySelectorAll("#gallery img").forEach(item=>{
 
+        item.classList.remove("active");
 
+    });
 
-document.getElementById("modal").style.display="block";
-
+    element.classList.add("active");
 
 }
 
 
-
-
-
-
-
-
-/* SELECCIONAR TALLA */
-
+/* =========================
+   SELECCIONAR TALLA
+========================= */
 
 function selectSize(element,size){
 
+    document.querySelectorAll(".size").forEach(btn=>{
 
-document.querySelectorAll(".size").forEach(btn=>{
+        btn.classList.remove("active");
 
-btn.classList.remove("active");
+    });
 
-});
+    element.classList.add("active");
 
-
-element.classList.add("active");
-
-
-selectedSize=size;
-
+    selectedSize = size;
 
 }
 
 
-
-
-
-
-
-
-/* CERRAR */
-
+/* =========================
+   CERRAR MODAL
+========================= */
 
 function closeModal(){
 
-document.getElementById("modal").style.display="none";
+    document.getElementById("modal").style.display = "none";
 
 }
 
 
-
-
-
-
-
-
-/* CANTIDAD */
-
+/* =========================
+   CANTIDAD
+========================= */
 
 function changeQty(value){
 
+    quantity += value;
 
-quantity+=value;
+    if(quantity < 1){
 
+        quantity = 1;
 
-if(quantity<1){
+    }
 
-quantity=1;
-
-}
-
-
-document.getElementById("qty").innerText=quantity;
-
+    document.getElementById("qty").innerText = quantity;
 
 }
-
-
-
-
-
-
 
 
 /* =========================
-   CARRITO
+   AGREGAR AL CARRITO
 ========================= */
-
 
 function addToCart(){
 
+    if(selected.stock===false){
 
-if(selected.stock===false){
+        showAlert("Este producto está agotado.");
 
-showAlert("Este producto está agotado.");
+        return;
 
-return;
+    }
 
-}
+    if(selectedSize===""){
 
+        showAlert("Selecciona una talla antes de continuar.");
 
+        return;
 
-if(selectedSize===""){
+    }
 
-showAlert("Selecciona una talla antes de continuar.");
+    if(!selected.sizes[selectedSize]){
 
-return;
+        showAlert("Esta talla está agotada.");
 
-}
+        return;
 
+    }
 
+    const images = selected.images || [selected.img];
 
-if(!selected.sizes[selectedSize]){
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-showAlert("Esta talla está agotada.");
+    let exist = cart.find(item=>
 
-return;
+        item.name===selected.name &&
+        item.size===selectedSize
 
-}
+    );
 
+    if(exist){
 
+        exist.qty += quantity;
 
-let cart=JSON.parse(localStorage.getItem("cart"))||[];
+    }else{
 
+        cart.push({
 
+            name:selected.name,
+            price:selected.price,
+            img:images[0],
+            qty:quantity,
+            size:selectedSize
 
+        });
 
-let exist=cart.find(item=>
+    }
 
-item.name===selected.name &&
+    localStorage.setItem("cart",JSON.stringify(cart));
 
-item.size===selectedSize
+    updateCartCount();
 
-);
+    showToast("Agregado al carrito");
 
-
-
-
-if(exist){
-
-
-exist.qty+=quantity;
-
-
-}else{
-
-
-cart.push({
-
-name:selected.name,
-
-price:selected.price,
-
-img:selected.img,
-
-qty:quantity,
-
-size:selectedSize
-
-});
-
+    closeModal();
 
 }
-
-
-
-
-
-localStorage.setItem("cart",JSON.stringify(cart));
-
-
-
-updateCartCount();
-
-
-
-showToast("Agregado al carrito");
-
-
-
-closeModal();
-
-
-}
-
-
-
-
-
 
 
 /* =========================
-   ALERTA PROFESIONAL
+   ALERTA
 ========================= */
-
 
 function showAlert(message){
 
+    let old=document.querySelector(".customAlert");
 
-let oldAlert=document.querySelector(".customAlert");
+    if(old) old.remove();
 
+    let box=document.createElement("div");
 
-if(oldAlert){
+    box.className="customAlert";
 
-oldAlert.remove();
+    box.innerHTML=`
 
-}
+    <div class="alertContent">
 
+        <div class="alertIcon">!</div>
 
+        <h3>Atención</h3>
 
-let alertBox=document.createElement("div");
+        <p>${message}</p>
 
+        <button onclick="closeAlert()">Entendido</button>
 
-alertBox.className="customAlert";
+    </div>
 
+    `;
 
-alertBox.innerHTML=`
-
-<div class="alertContent">
-
-
-<div class="alertIcon">
-!
-</div>
-
-
-<h3>Atención</h3>
-
-
-<p>${message}</p>
-
-
-<button onclick="closeAlert()">
-
-Entendido
-
-</button>
-
-
-</div>
-
-`;
-
-
-
-document.body.appendChild(alertBox);
-
-
+    document.body.appendChild(box);
 
 }
-
-
-
-
-
 
 function closeAlert(){
 
+    let box=document.querySelector(".customAlert");
 
-let alertBox=document.querySelector(".customAlert");
-
-
-if(alertBox){
-
-alertBox.remove();
+    if(box) box.remove();
 
 }
 
 
-}
-
-
-
-
-
-/* TOAST */
-
+/* =========================
+   TOAST
+========================= */
 
 function showToast(msg){
 
+    const toast=document.getElementById("toast");
 
-let toast=document.getElementById("toast");
+    toast.innerText=msg;
 
+    toast.classList.add("show");
 
-toast.innerText=msg;
+    setTimeout(()=>{
 
+        toast.classList.remove("show");
 
-toast.classList.add("show");
-
-
-
-setTimeout(()=>{
-
-
-toast.classList.remove("show");
-
-
-},2000);
-
-
+    },2000);
 
 }
 
 
+let selected = null;
+let quantity = 1;
+let selectedSize = "";
+
+let currentGenero = "";
 
 
+/* =========================
+   CAMBIAR TEMA
+========================= */
+
+function updateTheme(){
+
+    if(currentGenero==="mujer"){
+
+        document.body.classList.add("women-theme");
+
+    }else{
+
+        document.body.classList.remove("women-theme");
+
+    }
+
+}
 
 
+/* =========================
+   RENDER
+========================= */
 
+function render(filter="",genero=currentGenero){
 
+    const products=document.getElementById("products");
 
-/* BUSCADOR */
+    filter=filter.toLowerCase();
 
+    const filtered=data.filter(product=>{
 
-document.getElementById("searchInput")
+        let texto=
 
-.addEventListener("input",function(){
+            product.name.toLowerCase().includes(filter) ||
 
+            product.desc.toLowerCase().includes(filter);
 
-render(this.value);
+        let categoria=
 
+            genero==="" ||
+
+            product.genero===genero;
+
+        return texto && categoria;
+
+    });
+
+    if(!filtered.length){
+
+        products.innerHTML="<p>No hay resultados.</p>";
+
+        return;
+
+    }
+
+    products.innerHTML=filtered.map(product=>{
+
+        const img=(product.images && product.images.length)
+            ? product.images[0]
+            : product.img;
+
+        return `
+
+        <div class="card ${product.stock===false?'agotado':''}"
+
+        onclick="${
+            product.stock===false
+            ? 'showToast(`Producto agotado`)'
+            : `openDetail(${data.indexOf(product)})`
+        }">
+
+            <div class="imgBox">
+
+                <img src="${img}">
+
+                ${
+                    product.stock===false
+                    ? `<div class="soldOut">AGOTADO</div>`
+                    : ""
+                }
+
+            </div>
+
+            <div class="info">
+
+                <h4>${product.name}</h4>
+
+                <div class="price">
+                    C$${product.price}
+                </div>
+
+            </div>
+
+        </div>
+
+        `;
+
+    }).join("");
+
+}
+/* =========================
+   COMUNICADO
+========================= */
+
+const noticeModal = document.getElementById("noticeModal");
+
+window.addEventListener("load", () => {
+
+    // Espera un poco para que cargue todo
+    setTimeout(() => {
+        noticeModal.style.display = "flex";
+    }, 300);
 
 });
-
-
-
-
-
-
-
-
-
-/* COMUNICADO */
-
-
-const noticeModal=document.getElementById("noticeModal");
-
-
-
-window.addEventListener("load",()=>{
-
-
-noticeModal.style.display="flex";
-
-
-});
-
-
-
 
 function closeNotice(){
 
+    noticeModal.style.display = "none";
 
-noticeModal.style.display="none";
+}
+/* =========================
+   ICONO MUJER
+========================= */
 
+function showWomen(){
+
+    const icon=document.querySelector(".mujer-icon");
+
+    if(currentGenero==="mujer"){
+
+        currentGenero="";
+
+        icon.classList.remove("active");
+
+    }else{
+
+        currentGenero="mujer";
+
+        icon.classList.add("active");
+
+    }
+
+    updateTheme();
+
+    render(document.getElementById("searchInput").value,currentGenero);
 
 }
 
 
+/* =========================
+   HOMBRE
+========================= */
+
+function showMen(){
+
+    currentGenero="hombre";
+
+    const icon=document.querySelector(".mujer-icon");
+
+    if(icon) icon.classList.remove("active");
+
+    updateTheme();
+
+    render(document.getElementById("searchInput").value,currentGenero);
+
+}
 
 
+/* =========================
+   TODOS
+========================= */
+
+function showAll(){
+
+    currentGenero="";
+
+    const icon=document.querySelector(".mujer-icon");
+
+    if(icon){
+
+        icon.classList.remove("active");
+
+    }
+
+    updateTheme();
+
+    render(document.getElementById("searchInput").value,currentGenero);
+
+}
 
 
+/* =========================
+   BUSCADOR
+========================= */
+
+document.getElementById("searchInput").addEventListener("input",function(){
+
+    render(this.value,currentGenero);
+
+});
 
 
+/* =========================
+   INICIO
+========================= */
 
-/* INICIO */
-
+updateTheme();
 
 render();
 

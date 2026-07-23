@@ -878,6 +878,35 @@ opacity:1;
 }
 
 }
+/* FILTROS */
+
+.filters{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    padding:12px 15px;
+    border-bottom:1px solid #eee;
+}
+
+.filters::-webkit-scrollbar{
+    display:none;
+}
+
+.filters button{
+    border:none;
+    background:#f3f3f3;
+    padding:10px 18px;
+    border-radius:30px;
+    cursor:pointer;
+    white-space:nowrap;
+    font-weight:600;
+    transition:.25s;
+}
+
+.filters button.active{
+    background:#000;
+    color:#fff;
+}
 </style>
 </head>
 <body>
@@ -905,7 +934,15 @@ opacity:1;
 <div class="search">
   <input id="searchInput" placeholder="Buscar...">
 </div>
+<div class="filters">
+    <button class="active" onclick="setCategory('')">Todos</button>
+    <button onclick="setCategory('zapato')">Zapatos</button>
+    <button onclick="setCategory('camisa')">Camisas</button>
+    <button onclick="setCategory('crocs')">Crocs</button>
+    <button onclick="setCategory('chinela')">Chinelas</button>
+    <button onclick="setCategory('busos')">Busos</button>
 
+</div>
 <div class="content">
   <div class="grid" id="products"></div>
 </div>
@@ -1060,7 +1097,7 @@ name:"Nike Mind (Blancas)",
 price:900,
 img:"3.jpeg",
 desc:"Nike Mind (Blancas)",
-type:"zapato",
+type:"chinela",
 genero:"mujer",
 
 stock:true,
@@ -1078,11 +1115,53 @@ sizes:{
 
 
 {
-name:"Nike TN",
+name:"Nike Mind (Negras)",
+price:900,
+img:"15.jpeg",
+desc:"Nike Mind (Negras)",
+type:"chinela",
+genero:"hombre",
+
+stock:true,
+
+sizes:{
+"36":true,
+"37":true,
+"38":true,
+"39":false,
+"40":true,
+"41":true
+}
+
+},
+
+{
+name:"Nike Mind (Rojo)",
+price:900,
+img:"16.jpeg",
+desc:"Nike Mind (Rojo)",
+type:"chinela",
+genero:"hombre",
+
+stock:true,
+
+sizes:{
+"36":true,
+"37":true,
+"38":true,
+"39":false,
+"40":true,
+"41":true
+}
+
+},
+
+{
+name:"Nike Mind",
 price:1390,
-img:"4.jpeg",
+img:"14.jpeg",
 desc:"Nike TN Blanco",
-type:"zapato",
+type:"chinela",
 genero:"hombre",
 
 stock:true,
@@ -1187,6 +1266,51 @@ sizes:{
 
 },
  
+
+{
+name:"Busos wid",
+price:380,
+images:[
+"17.jpeg",
+],
+desc:"Camiseta Kappa Negra",
+type:"busos",
+genero:"hombre",
+
+stock:true,
+
+sizes:{
+"S":true,
+"M":true,
+"L":false,
+"XL":true,
+"XXL":false
+}
+
+},
+
+
+{
+name:"Busos wid",
+price:380,
+images:[
+"18.jpeg",
+],
+desc:"Camiseta Kappa Negra",
+type:"busos",
+genero:"hombre",
+
+stock:true,
+
+sizes:{
+"S":true,
+"M":true,
+"L":false,
+"XL":true,
+"XXL":false
+}
+
+},
 {
 name:"Crocs del rayo mcqueen",
 price:1450,
@@ -1542,8 +1666,6 @@ let selected = null;
 let quantity = 1;
 let selectedSize = "";
 
-let currentGenero = "";
-
 
 /* =========================
    CAMBIAR TEMA
@@ -1563,68 +1685,62 @@ function updateTheme(){
 
 }
 
+// =========================
+// VARIABLES FILTROS
+// =========================
 
-/* =========================
-   RENDER
-========================= */
+let currentGenero = "";
+let currentCategory = "";
 
-function render(filter="",genero=currentGenero){
+// =========================
+// RENDER
+// =========================
 
-    const products=document.getElementById("products");
+function render(filter = "", genero = currentGenero, categoria = currentCategory){
 
-    filter=filter.toLowerCase();
+    const products = document.getElementById("products");
 
-    const filtered=data.filter(product=>{
+    filter = filter.toLowerCase();
 
-        let texto=
+    const filtered = data.filter(product => {
 
+        const texto =
             product.name.toLowerCase().includes(filter) ||
-
             product.desc.toLowerCase().includes(filter);
 
-        let categoria=
+        const generoOk =
+            genero === "" ||
+            product.genero === genero;
 
-            genero==="" ||
+        const categoriaOk =
+            categoria === "" ||
+            product.type === categoria;
 
-            product.genero===genero;
-
-        return texto && categoria;
+        return texto && generoOk && categoriaOk;
 
     });
 
-    if(!filtered.length){
+    if(filtered.length === 0){
 
-        products.innerHTML="<p>No hay resultados.</p>";
+        products.innerHTML = "<p>No hay resultados.</p>";
 
         return;
 
     }
 
-    products.innerHTML=filtered.map(product=>{
+    products.innerHTML = filtered.map(product => {
 
-        const img=(product.images && product.images.length)
-            ? product.images[0]
-            : product.img;
+        const img = product.images?.[0] || product.img;
 
         return `
-
-        <div class="card ${product.stock===false?'agotado':''}"
-
-        onclick="${
-            product.stock===false
-            ? 'showToast(`Producto agotado`)'
-            : `openDetail(${data.indexOf(product)})`
-        }">
+        <div class="card ${!product.stock ? "agotado" : ""}"
+             onclick="${!product.stock ? "showToast('Producto agotado')" : `openDetail(${data.indexOf(product)})`}">
 
             <div class="imgBox">
 
                 <img src="${img}">
 
-                ${
-                    product.stock===false
-                    ? `<div class="soldOut">AGOTADO</div>`
-                    : ""
-                }
+                ${!product.stock ? '<div class="soldOut">AGOTADO</div>' : ""}
 
             </div>
 
@@ -1632,19 +1748,135 @@ function render(filter="",genero=currentGenero){
 
                 <h4>${product.name}</h4>
 
-                <div class="price">
-                    C$${product.price}
-                </div>
+                <div class="price">C$${product.price}</div>
 
             </div>
 
         </div>
-
         `;
 
     }).join("");
 
 }
+
+// =========================
+// FILTRO CATEGORÍAS
+// =========================
+
+function setCategory(category){
+
+    currentCategory = category;
+
+    document.querySelectorAll(".filters button").forEach(btn=>{
+        btn.classList.remove("active");
+    });
+
+    event.target.classList.add("active");
+
+    render(
+        document.getElementById("searchInput").value,
+        currentGenero,
+        currentCategory
+    );
+
+}
+
+// =========================
+// FILTRO MUJER
+// =========================
+
+function showWomen(){
+
+    const icon = document.querySelector(".mujer-icon");
+
+    if(currentGenero === "mujer"){
+
+        currentGenero = "";
+        icon.classList.remove("active");
+
+    }else{
+
+        currentGenero = "mujer";
+        icon.classList.add("active");
+
+    }
+
+    updateTheme();
+
+    render(
+        document.getElementById("searchInput").value,
+        currentGenero,
+        currentCategory
+    );
+
+}
+
+// =========================
+// FILTRO HOMBRE
+// =========================
+
+function showMen(){
+
+    currentGenero = "hombre";
+
+    document.querySelector(".mujer-icon").classList.remove("active");
+
+    updateTheme();
+
+    render(
+        document.getElementById("searchInput").value,
+        currentGenero,
+        currentCategory
+    );
+
+}
+
+// =========================
+// MOSTRAR TODOS
+// =========================
+
+function showAll(){
+
+    currentGenero = "";
+    currentCategory = "";
+
+    document.querySelector(".mujer-icon").classList.remove("active");
+
+    document.querySelectorAll(".filters button").forEach(btn=>{
+        btn.classList.remove("active");
+    });
+
+    document.querySelector(".filters button").classList.add("active");
+
+    updateTheme();
+
+    document.getElementById("searchInput").value = "";
+
+    render("", "", "");
+
+}
+
+// =========================
+// BUSCADOR
+// =========================
+
+document.getElementById("searchInput").addEventListener("input", function(){
+
+    render(
+        this.value,
+        currentGenero,
+        currentCategory
+    );
+
+});
+
+// =========================
+// INICIO
+// =========================
+
+updateTheme();
+render();
+updateCartCount();
 /* =========================
    COMUNICADO
 ========================= */

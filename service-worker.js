@@ -2,7 +2,7 @@
 // VERSION APP
 // =========================
 
-const CACHE_NAME = "horizon-v3";
+const CACHE_NAME = "horizon-v2";
 
 
 // =========================

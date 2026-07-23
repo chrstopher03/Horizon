@@ -1167,11 +1167,125 @@ body.dark .footer-social i{
     color:white;
 
 }
+
+.side-menu{
+
+position:fixed;
+top:0;
+left:-300px;
+
+width:280px;
+height:100%;
+
+background:white;
+
+z-index:999;
+
+transition:.3s;
+
+box-shadow:5px 0 20px rgba(0,0,0,.2);
+
+}
+
+
+.side-menu.active{
+
+left:0;
+
+}
+
+
+.menu-header{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:20px;
+
+border-bottom:1px solid #ddd;
+
+}
+
+
+.menu-header h2{
+
+margin:0;
+font-size:25px;
+
+}
+
+
+.menu-header i{
+
+font-size:22px;
+cursor:pointer;
+
+}
+
+
+.menu-links{
+
+padding:20px;
+
+}
+
+
+.menu-links a{
+
+display:flex;
+align-items:center;
+gap:15px;
+
+padding:15px 5px;
+
+font-size:17px;
+
+cursor:pointer;
+
+color:#111;
+
+}
+
+
+.menu-links a:hover{
+
+opacity:.6;
+
+}
+
+
+
+.overlay{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,.5);
+
+display:none;
+
+z-index:998;
+
+}
+
+
+.overlay.active{
+
+display:block;
+
+}
 </style>
 </head>
 <body><div class="header">
 
-  <i class="fa fa-bars"></i>
+  <!-- MENU -->
+  <i class="fa fa-bars menu-btn" onclick="openMenu()"></i>
 
   <h1 class="brand" onclick="showAll()">
     HORIZON
@@ -1191,14 +1305,56 @@ body.dark .footer-social i{
 
     <!-- CARRITO -->
     <div class="cart-icon-header" onclick="location.href='carrito.html'">
-
       <i class="fa fa-shopping-bag"></i>
-
     </div>
 
   </div>
 
 </div>
+
+
+<!-- MENU LATERAL -->
+
+<div class="side-menu" id="sideMenu">
+
+  <div class="menu-header">
+    <h2>HORIZON</h2>
+    <i class="fa fa-xmark" onclick="closeMenu()"></i>
+  </div>
+
+
+  <div class="menu-links">
+
+    <a onclick="showAll()">
+      <i class="fa fa-house"></i>
+      Inicio
+    </a>
+
+
+    <a onclick="showWomen()">
+      <i class="fa-solid fa-venus"></i>
+      Mujer
+    </a>
+
+
+    <a href="carrito.html">
+      <i class="fa fa-shopping-bag"></i>
+      Carrito
+    </a>
+
+
+    <a onclick="contactar()">
+      <i class="fa fa-phone"></i>
+      Contactarse
+    </a>
+
+  </div>
+
+</div>
+
+
+<!-- Fondo oscuro -->
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
 <div class="search">
   <input id="searchInput" placeholder="Buscar...">
 </div>
@@ -2069,7 +2225,33 @@ function render(filter = "", genero = currentGenero, categoria = currentCategory
     }).join("");
 
 }
+function openMenu(){
 
+document.getElementById("sideMenu").classList.add("active");
+
+document.getElementById("overlay").classList.add("active");
+
+}
+
+
+function closeMenu(){
+
+document.getElementById("sideMenu").classList.remove("active");
+
+document.getElementById("overlay").classList.remove("active");
+
+}
+
+
+
+function contactar(){
+
+window.open(
+"https://wa.me/50582337242?text=Hola%20HORIZON,%20quiero%20más%20información",
+"_blank"
+);
+
+}
 // =========================
 // FILTRO CATEGORÍAS
 // =========================

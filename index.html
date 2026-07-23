@@ -18,73 +18,158 @@ body{
   font-family:'Poppins',sans-serif;
   background:#ffffff;
   color:#161616;
-}
+}/* =========================
+   HEADER
+========================= */
+
 .header{
+
     position:sticky;
     top:0;
+
     background:#ffffffd9;
     backdrop-filter:blur(12px);
+
     height:65px;
     padding:0 18px;
+
     display:flex;
     align-items:center;
     justify-content:space-between;
+
     border-bottom:1px solid #eee;
+
     z-index:100;
-    position:sticky;
+
 }
 
+
 /* LOGO CENTRADO */
+
 .brand{
+
     position:absolute;
     left:50%;
     transform:translateX(-50%);
+
     margin:0;
 
     font-family:'Playfair Display',serif;
     font-size:20px;
     font-weight:700;
+
     cursor:pointer;
     user-select:none;
+
 }
 
-/* Iconos */
+
+/* ICONOS HEADER */
+
 .header > i,
 .header-icons{
+
     z-index:2;
+
 }
+
 
 .header-icons{
+
     display:flex;
     align-items:center;
-    gap:14px;
+
+    gap:16px;
+
 }
-/* SEARCH */
+
+
+/* BOTON MODO OSCURO */
+
+.theme-toggle{
+
+    width:32px;
+    height:32px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    border-radius:50%;
+
+    font-size:16px;
+
+}
+
+
+/* ICONOS */
+
+.header-icons i,
+.header > i{
+
+    cursor:pointer;
+    font-size:18px;
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
 .search{
-  border-bottom:1px solid #7b7b7b;
-  padding:5px 10px;
+
+    border-bottom:1px solid #7b7b7b;
+
+    padding:5px 10px;
+
 }
+
 
 .search input{
-  width:100%;
-  padding:10px;
-  border:none;
-  outline:none;
-  background:transparent;
+
+    width:100%;
+
+    padding:10px;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
 }
 
-/* CONTENT */
+
+/* =========================
+   CONTENT
+========================= */
+
 .content{
-  padding:15px;
-  padding-bottom:100px;
+
+    padding:15px;
+
+    padding-bottom:100px;
+
 }
 
-/* GRID */
+
+/* =========================
+   GRID PRODUCTOS
+========================= */
+
 .grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:16px;
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:16px;
+
 }
+
 
 @media(min-width:768px){
   .grid{grid-template-columns:repeat(3,1fr);}
@@ -907,11 +992,184 @@ opacity:1;
     background:#000;
     color:#fff;
 }
+
+.theme-toggle{
+    cursor:pointer;
+    font-size:18px;
+}
+
+.theme-toggle{
+
+    cursor:pointer;
+    font-size:18px;
+
+    width:32px;
+    height:32px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+}
+/* =========================
+   MODO OSCURO
+========================= */
+
+body.dark{
+
+    background:#121212;
+    color:white;
+
+}
+
+
+body.dark .header{
+
+    background:#1b1b1b;
+    border-bottom:1px solid #333;
+
+}
+
+
+body.dark .brand{
+
+    background:none;
+    -webkit-text-fill-color:white;
+    color:white;
+
+}
+
+
+body.dark .card{
+
+    background:#1f1f1f;
+
+}
+
+
+body.dark .card h4{
+
+    color:white;
+
+}
+
+
+body.dark .price{
+
+    color:white;
+
+}
+
+
+body.dark .search{
+
+    border-color:#444;
+
+}
+
+
+body.dark .search input{
+
+    color:white;
+
+}
+
+
+body.dark .modal-content{
+
+    background:#1b1b1b;
+    color:white;
+
+}
+
+
+body.dark .modal p{
+
+    color:#ccc;
+
+}
+
+
+body.dark .nav{
+
+    background:#1b1b1b;
+
+}
+
+
+body.dark .nav i{
+
+    color:white;
+
+}
+
+
+body.dark .filters{
+
+    border-color:#333;
+
+}
+
+
+body.dark .filters button{
+
+    background:#2b2b2b;
+    color:white;
+
+}
+
+
+body.dark .filters button.active{
+
+    background:white;
+    color:black;
+
+}
+
+
+body.dark .theme-toggle{
+
+    color:white;
+
+}
+/* =========================
+   FOOTER MODO OSCURO
+========================= */
+
+body.dark .footer{
+
+    background:#121212;
+    color:white;
+
+}
+
+
+body.dark .footer p{
+
+    color:#aaa;
+
+}
+
+
+body.dark .footer-copy{
+
+    border-top:1px solid #333;
+    color:#777;
+
+}
+
+
+body.dark .footer-social i{
+
+    background:#1f1f1f;
+    color:white;
+
+}
 </style>
 </head>
-<body>
-
-<div class="header">
+<body><div class="header">
 
   <i class="fa fa-bars"></i>
 
@@ -921,16 +1179,26 @@ opacity:1;
 
   <div class="header-icons">
 
+    <!-- MODO OSCURO -->
+    <div class="theme-toggle" onclick="toggleDarkMode()">
+      <i class="fa-solid fa-moon"></i>
+    </div>
+
+
+    <!-- MUJER -->
     <i class="fa-solid fa-venus mujer-icon" onclick="showWomen()"></i>
 
+
+    <!-- CARRITO -->
     <div class="cart-icon-header" onclick="location.href='carrito.html'">
+
       <i class="fa fa-shopping-bag"></i>
+
     </div>
 
   </div>
 
 </div>
-
 <div class="search">
   <input id="searchInput" placeholder="Buscar...">
 </div>
@@ -954,7 +1222,6 @@ opacity:1;
 <!-- =========================
      MODAL PRODUCTO
 ========================= -->
-
 <div class="modal" id="modal">
 
   <div class="modal-content">
@@ -1481,7 +1748,48 @@ function changeImage(img,element){
 
 }
 
+function toggleDarkMode(){
 
+    document.body.classList.toggle("dark");
+
+    const icon=document.querySelector(".theme-toggle i");
+
+    if(document.body.classList.contains("dark")){
+
+        icon.classList.remove("fa-moon");
+        icon.classList.add("fa-sun");
+
+        localStorage.setItem("theme","dark");
+
+    }else{
+
+        icon.classList.remove("fa-sun");
+        icon.classList.add("fa-moon");
+
+        localStorage.setItem("theme","light");
+
+    }
+
+}
+
+
+window.addEventListener("load",()=>{
+
+    const theme=localStorage.getItem("theme");
+
+    const icon=document.querySelector(".theme-toggle i");
+
+
+    if(theme==="dark"){
+
+        document.body.classList.add("dark");
+
+        icon.classList.remove("fa-moon");
+        icon.classList.add("fa-sun");
+
+    }
+
+});
 /* =========================
    SELECCIONAR TALLA
 ========================= */
@@ -2274,7 +2582,64 @@ type:"SKIP_WAITING"
 
 
 
+}function toggleDarkMode(){
+
+    document.body.classList.toggle("dark");
+
+    const icon = document.querySelector(".theme-toggle i");
+
+    if(document.body.classList.contains("dark")){
+
+        if(icon){
+            icon.classList.remove("fa-moon");
+            icon.classList.add("fa-sun");
+        }
+
+        localStorage.setItem("theme","dark");
+
+    }else{
+
+        if(icon){
+            icon.classList.remove("fa-sun");
+            icon.classList.add("fa-moon");
+        }
+
+        localStorage.setItem("theme","light");
+
+    }
+
 }
+
+
+// CARGAR TEMA GUARDADO
+window.addEventListener("load",()=>{
+
+    const theme = localStorage.getItem("theme");
+
+    const icon = document.querySelector(".theme-toggle i");
+
+
+    if(theme === "dark"){
+
+        document.body.classList.add("dark");
+
+        if(icon){
+            icon.classList.remove("fa-moon");
+            icon.classList.add("fa-sun");
+        }
+
+    }else{
+
+        document.body.classList.remove("dark");
+
+        if(icon){
+            icon.classList.remove("fa-sun");
+            icon.classList.add("fa-moon");
+        }
+
+    }
+
+});
 </script>
 
 </body>

@@ -1280,6 +1280,47 @@ z-index:998;
 display:block;
 
 }
+
+/* ===== VISOR DE IMAGEN ===== */
+
+.image-viewer{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.95);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:999999;
+    animation:fadeIn .2s;
+}
+
+.image-viewer img{
+    max-width:95%;
+    max-height:95%;
+    object-fit:contain;
+    padding:0;
+    background:none;
+    border-radius:0;
+}
+
+.close-viewer{
+    position:absolute;
+    top:20px;
+    right:25px;
+    color:#fff;
+    font-size:40px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+#dImg{
+    cursor:zoom-in;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
 </style>
 </head>
 <body><div class="header">
@@ -1383,8 +1424,7 @@ display:block;
   <div class="modal-content">
 
     <!-- Imagen principal -->
-    <img id="dImg">
-
+<img id="dImg" onclick="openImageViewer()">
     <!-- Miniaturas -->
     <div class="gallery" id="gallery"></div>
 
@@ -1423,7 +1463,11 @@ display:block;
   </div>
 
 </div>
-
+<!-- VISOR DE IMAGEN -->
+<div class="image-viewer" id="imageViewer" onclick="closeImageViewer()">
+    <span class="close-viewer">&times;</span>
+    <img id="viewerImg">
+</div>
 <!-- =========================
      NAVEGACIÓN
 ========================= -->
@@ -1739,6 +1783,24 @@ sizes:{
 
 
 {
+name:"Camiseta Kappa Menta",
+price:480,
+img:"26.jpeg",
+desc:"Camiseta Kappa Menta",
+type:"camisa",
+genero:"hombre",
+
+stock:true,
+
+sizes:{
+"S":true,
+"M":true,
+"L":true,
+}
+
+},
+
+{
 name:"Camiseta Kappa Blanca",
 price:750,
 images:[
@@ -1889,6 +1951,50 @@ sizes:{
 {
 name:"Crocs clasica rosada",
 price:500,
+img:"24.jpeg",
+desc:"Crocs clasica rosada",
+type:"crocs",
+genero:"mujer",
+
+stock:true,
+
+sizes:{
+"37":true,
+"38":true,
+"39":false,
+"40":true,
+"41":true,
+"42":true
+}
+
+},
+
+
+{
+name:"Crocs clasica celestes",
+price:500,
+img:"25.jpeg",
+desc:"Crocs clasica celestes",
+type:"crocs",
+genero:"mujer",
+
+stock:true,
+
+sizes:{
+"37":true,
+"38":true,
+"39":false,
+"40":true,
+"41":true,
+"42":true
+}
+
+},
+
+
+{
+name:"Crocs clasica rosada",
+price:500,
 img:"22.jpeg",
 desc:"Crocs clasica rosada",
 type:"crocs",
@@ -1907,7 +2013,21 @@ sizes:{
 
 }
 ];
+function openImageViewer(){
 
+    const img=document.getElementById("dImg").src;
+
+    document.getElementById("viewerImg").src=img;
+
+    document.getElementById("imageViewer").style.display="flex";
+
+}
+
+function closeImageViewer(){
+
+    document.getElementById("imageViewer").style.display="none";
+
+}
 /* =========================
    CONTADOR CARRITO
 ========================= */
@@ -2351,7 +2471,7 @@ document.getElementById("overlay").classList.remove("active");
 function contactar(){
 
 window.open(
-"https://wa.me/50582337242?text=Hola%20HORIZON,%20quiero%20más%20información",
+"https://wa.me/50583606001?text=Hola%20HORIZON,%20quiero%20más%20información",
 "_blank"
 );
 

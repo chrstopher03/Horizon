@@ -1810,7 +1810,7 @@ name:"Sueter de Spiderman",
 price:600,
 images:[
 "31.jpeg",
-"22.jpeg",
+"32.jpeg",
 
 ],
 
@@ -2153,21 +2153,28 @@ function openDetail(index){
     document.getElementById("dName").innerText = selected.name;
     document.getElementById("dDesc").innerText = selected.desc;
     document.getElementById("dPrice").innerText = "C$"+selected.price;
+const sizeBox = document.getElementById("sizeBox");
+
+if(Object.keys(selected.sizes).length === 0){
+
+    sizeBox.style.display = "none";
+    selectedSize = "SIN_TALLA";
+
+}else{
+
+    sizeBox.style.display = "block";
 
     document.getElementById("sizes").innerHTML =
-
     Object.keys(selected.sizes).map(size=>`
-
         <div class="size ${selected.sizes[size] ? "" : "disabled"}"
         onclick="${selected.sizes[size] ? `selectSize(this,'${size}')` : ""}">
-
             ${size}
-
             ${selected.sizes[size] ? "" : "<small>Agotada</small>"}
-
         </div>
-
     `).join("");
+
+    selectedSize = "";
+}
 
     document.getElementById("modal").style.display="block";
 
@@ -2297,16 +2304,21 @@ function addToCart(){
 
     }
 
-    if(selectedSize===""){
+ if(
+    Object.keys(selected.sizes).length > 0 &&
+    selectedSize === ""
+){
 
-        showAlert("Selecciona una talla antes de continuar.");
+    showAlert("Selecciona una talla antes de continuar.");
 
-        return;
+    return;
 
-    }
+}
 
-    if(!selected.sizes[selectedSize]){
-
+if(
+    Object.keys(selected.sizes).length > 0 &&
+    !selected.sizes[selectedSize]
+){
         showAlert("Esta talla está agotada.");
 
         return;

@@ -600,56 +600,58 @@ function goBack(){
 }
 
 /* ENVIAR A WHATSAPP */
-
+/* ENVIAR A WHATSAPP */
 function enviarWhatsApp(){
 
-    const cart=JSON.parse(localStorage.getItem("cart"))||[];
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    if(cart.length===0){
-
+    if(cart.length === 0){
         showToast("Carrito vacío");
-
         return;
-
     }
 
-    let total=0;
+    let total = 0;
+    const fecha = new Date();
 
-    let mensaje="🛍️ *Pedido HORIZON*\n\n";
-
-    mensaje+="📅 "+new Date().toLocaleDateString()+"\n";
-    mensaje+="🕒 "+new Date().toLocaleTimeString()+"\n\n";
+    // Ticket
+    let mensaje = "```";
+    mensaje += "          HORIZON\n";
+    mensaje += "--------------------------------\n";
+    mensaje += `Fecha: ${fecha.toLocaleDateString()}\n`;
+    mensaje += `Hora : ${fecha.toLocaleTimeString()}\n`;
+    mensaje += "--------------------------------\n";
 
     cart.forEach((p,index)=>{
 
-        const subtotal=p.price*p.qty;
+        const cantidad = p.qty || 1;
+        const subtotal = p.price * cantidad;
 
-        total+=subtotal;
-
-        mensaje+=`${index+1}. ${p.name}\n`;
+        mensaje += `${index + 1}. ${p.name}\n`;
 
         if(p.size){
-
-            mensaje+=`📏 Talla: ${p.size}\n`;
-
+            mensaje += `   Talla : ${p.size}\n`;
         }
 
-        mensaje+=`Cantidad: ${p.qty}\n`;
-        mensaje+=`Precio: C$${p.price}\n`;
-        mensaje+=`Subtotal: C$${subtotal}\n\n`;
+        mensaje += `   Cant. : ${cantidad}\n`;
+        mensaje += `   Precio: C$${p.price}\n`;
+        mensaje += `   Total : C$${subtotal}\n`;
+        mensaje += "--------------------------------\n";
+
+        total += subtotal;
 
     });
 
-    mensaje+="━━━━━━━━━━━━━━\n";
-    mensaje+=`💰 TOTAL: C$${total}`;
+    mensaje += `TOTAL GENERAL: C$${total}\n`;
+    mensaje += "--------------------------------\n";
+    mensaje += "Gracias por comprar en HORIZON\n";
+    mensaje += "```";
 
     window.open(
-        "https://wa.me/50583606001?text="+encodeURIComponent(mensaje),
+        "https://wa.me/50583606001?text=" + encodeURIComponent(mensaje),
         "_blank"
     );
 
 }
-
 /* VARIABLES */
 
 const items=document.getElementById("items");
